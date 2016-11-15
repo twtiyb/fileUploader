@@ -1,0 +1,24 @@
+server:
+  port: 8888
+
+app:
+  name : uploader
+  defaultContainer: temp
+
+filesClient:
+  username: testuser:swift
+  password: tthksqNaJdS6RvNaOh9p5aTRu5qkMDCLITi7iYFM
+  account:
+  authenticationURL: http://192.168.6.93/auth/
+  connectionTimeOut: 60000
+
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 20Mb
+      max-request-size: 20Mb
+
