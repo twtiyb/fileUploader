@@ -159,7 +159,7 @@
             swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/file/uploads',
+            server: '/file/upload',
             //runtimeOrder: 'flash',
 
             // accept: {
