@@ -225,10 +225,11 @@ public class UploadAction {
 		return abs;
 	}
 
-	private Map<String, String> converMap(Map parameterMap) {
+	private Map<String, String> converMap(Map<String, String[]> parameterMap) {
+		HashMap map = new HashMap();
 		for (Object key : parameterMap.keySet()) {
-			parameterMap.put(key, parameterMap.get(key).toString());
+			map.put(key, (parameterMap.get(key))[0]);
 		}
-		return parameterMap;
+		return map;
 	}
 }

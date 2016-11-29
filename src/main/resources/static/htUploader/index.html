@@ -2,11 +2,26 @@
 <html>
 <body>
 
+<div>
+<p>uploads   上传文件名称变为uuid</p>
+
 <form action="/file/uploads" method="post"  enctype="multipart/form-data" >
+    选择目录：<input  name="path" value="temp" type="text">
     选择图片：<input type="file" name="file" multiple="multiple" />
     <input type="submit" />
 </form>
-<p>请尝试在浏览文件时选取一个以上的文件。</p>
+</div>
+<div>
+
+
+<p>modify   上传文件名称不变,如果之前存在文件则会覆盖</p>
+<form action="/file/modify" method="post"  enctype="multipart/form-data" >
+    选择目录：<input  name="path" value="temp" type="text">
+    选择图片：<input type="file" name="file" multiple="multiple" />
+    <input type="submit" />
+</form>
+    </div>
+
 
 </body>
 </html>
