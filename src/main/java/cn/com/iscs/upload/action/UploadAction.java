@@ -1,10 +1,9 @@
 package cn.com.iscs.upload.action;
 
+import com.mosso.client.cloudfiles.FilesContainer;
+import com.mosso.client.cloudfiles.FilesObject;
 import cn.com.iscs.upload.entity.AbsResponse;
 import cn.com.iscs.upload.util.FilesClientWrap;
-import com.mosso.client.cloudfiles.FilesContainer;
-import com.mosso.client.cloudfiles.FilesContainerInfo;
-import com.mosso.client.cloudfiles.FilesObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +47,7 @@ public class UploadAction {
 			if (StringUtils.isEmpty(container)) {
 				container = FILE_CONTAINER;
 			}
-			filesClient.storeStreamedObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
+			filesClient.storeObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
 		} catch (IOException e) {
 			System.out.println(e.toString());
 //			log.error(e);
@@ -86,7 +85,7 @@ public class UploadAction {
 				if (StringUtils.isEmpty(container)) {
 					container = FILE_CONTAINER;
 				}
-				filesClient.storeStreamedObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
+				filesClient.storeObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
 				Map map = new HashMap();
 				map.put("path", "/" + container + "/" + fileName);
 				map.put("name", fileName);
@@ -125,7 +124,7 @@ public class UploadAction {
 			if (StringUtils.isEmpty(container)) {
 				container = FILE_CONTAINER;
 			}
-			filesClient.storeStreamedObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
+			filesClient.storeObject(container, file.getInputStream(), file.getContentType(), fileName, converMap(request.getParameterMap()));
 		} catch (IOException e) {
 //			log.error(e);
 			System.out.println(e.toString());
@@ -153,7 +152,6 @@ public class UploadAction {
 	                        @RequestParam(value = "limit") int limit) throws Exception {
 		AbsResponse abs = new AbsResponse();
 
-		FilesContainerInfo container = filesClient.getContainerInfo(path);
 		List<FilesObject> objList = filesClient.listObjects(path, limit, startFile);
 		List<HashMap> filesList = new ArrayList<>();
 		for (FilesObject obj : objList) {
@@ -166,7 +164,7 @@ public class UploadAction {
 			filesList.add(fileMap);
 		}
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", container.getTotalSize());
+//		map.put("total", container.getTotalSize());
 		map.put("curTotal", filesList.size());
 		map.put("path", path);
 		abs.setData(map);
@@ -189,7 +187,7 @@ public class UploadAction {
 		for (FilesContainer obj : objList) {
 			HashMap fileMap = new HashMap();
 			fileMap.put("name", obj.getName());
-			fileMap.put("info", obj.getInfo());
+//			fileMap.put("info", obj.getInfo());
 			filesList.add(fileMap);
 		}
 		abs.setData(filesList);
